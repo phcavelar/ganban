@@ -9,7 +9,6 @@ For now I'm only following the [Miguel Grinberg's Flask Mega Tutorial](https://b
 ## To-do
 
 * Complete Miguel Grinberg's tutorial
-  * Part 5
   * Part 6
   * Part 7
   * Part 8
