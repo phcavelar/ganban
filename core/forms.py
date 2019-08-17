@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms import StringField, TextAreaField, PasswordField, BooleanField, SubmitField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from core.models import User
 
 class LoginForm(FlaskForm):
@@ -31,3 +31,16 @@ class RegistrationForm(FlaskForm):
         #end if
     #end validate_username
 #end RegistrationForm
+
+class EditProfileForm(FlaskForm):
+    username = StringField("Username", validators=[DataRequired()])
+    about_me = TextAreaField("About me", validators=[Length(min=0,max=140)])
+    submit = SubmitField("Submit")
+    
+    def validate_username(self,username):
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError("Username already taken!")
+        #end if
+    #end validate_username
+#end EditProfileForm
